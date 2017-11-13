@@ -268,7 +268,7 @@ export class AdminComponent implements OnInit {
   //delete season for deleted season
   deleteSeriesSeason(_id) {
     this.connect.deleteSeriesSeason(_id).subscribe(res => {
-     // this.getSeasons();
+      this.getSeasons(_id);
       this.deleteSeriesEpisode(_id);
     }
       , error => {
@@ -278,9 +278,8 @@ export class AdminComponent implements OnInit {
 
   //delete episodes for deleted series
   deleteSeriesEpisode(_id) {
-    alert("ihjiweh")
     this.connect.deleteSeriesEpisode(_id).subscribe(res => {
-      //this.getEpisodes();
+      this.getEpisodes(_id);
     }
       , error => {
         alert(error);
@@ -345,8 +344,8 @@ export class AdminComponent implements OnInit {
     if (sure == true) {
       this.connect.deleteSeason(_id).subscribe(res => {
         alert("Deleted");
-        console.log("in deleteSeason seriesid",localStorage.getItem("seriesid"))        
        this.getSeasons(localStorage.getItem("seriesid"));
+       this.deleteSeriesEpisode(_id);
       }
         , error => {
           alert(error);

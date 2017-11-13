@@ -1,19 +1,16 @@
 <app-header-login></app-header-login>
 <div class="row">
+    <div class="col-sm-4"></div>
+        <div class="col-sm-4">
     <h1 style="text-align:center"> Welcome Super Admin </h1>
 </div>
-<div class="row">
-    <div class="col-sm-6" id="buttons">
-        <!-- <div *ngIf="!flag">
-            <button type="button" (click)="add()" class="btn btn-outline-primary">Add user</button>
-        </div> -->
-    </div>
-    <div class="col-sm-6" id="buttons">
-        <div *ngIf="!users">
-            <button type="`button" (click)="getUsers()" class="btn btn-outline-primary">Show users</button>
+    <div class="col-sm-4" id="buttons">
+            <div *ngIf="!users">
+                <button type="`button" (click)="getUsers()" class="btn btn-outline-primary">Show users</button>
+            </div>
         </div>
-    </div>
 </div>
+
 <!-- <div *ngIf="flag"> -->
 <form (ngSubmit)="addUser()" [formGroup]="user">
     <div class="container">

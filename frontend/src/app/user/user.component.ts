@@ -48,10 +48,9 @@ export class UserComponent implements OnInit {
       if(res.data!="no match"){
       this.s=res.data;
       }
-      else{
+      else if(res.data=="no match"){
         alert("no match found")
       }
-      
   })
   }
 
@@ -59,13 +58,13 @@ export class UserComponent implements OnInit {
   //search a movie
   searchMovies(){
     this.connect.searchMovies(this.search).subscribe(res =>{
+      console.log(res)
       if(res.data!="no match"){
         this.searchedMovie=res.data[0];    
           }
-        else{
-          alert("no match found")
-        }
-       
+          else {
+            alert("no match found")
+          }
     })
   }
 
@@ -98,8 +97,12 @@ export class UserComponent implements OnInit {
   //search seasons
   searchSeason(){
     this.connect.searchSeason(this.search).subscribe(res =>{
+      console.log("re",res.data)
       if(res.data!="no match"){
         this.searchedSeason=res.data[0];
+      }
+      else if (res.data == "no match") {
+        alert("no match found")
       }
         else{
           alert("no match found")

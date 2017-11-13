@@ -23,6 +23,7 @@ export class ConnectDbService {
 
   //save user details
   PostUser(user): Observable<any> {
+    console.log("user in service", user);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json')
     let options = new RequestOptions({ headers: headers });

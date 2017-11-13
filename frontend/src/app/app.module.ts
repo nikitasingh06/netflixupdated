@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, FormControl, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -34,10 +33,7 @@ export const appRoutes: Routes = [
     path: 'user', component: UserComponent, canActivate: [AuthService], data: [{ type: '3' }]
   },
   {
-    path: 'sign-up', component: SignUpComponent
-  },
-  {
-    path: 'login', component: LoginComponent
+    path: 'login', component: UserLoginComponent
   },
   {
     path: '', component: HomepageComponent
@@ -59,7 +55,6 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
     LoginComponent,
     HeaderComponent,
     FooterComponent,

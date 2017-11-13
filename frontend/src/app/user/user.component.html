@@ -1,251 +1,250 @@
 <app-header-login></app-header-login>
 <div class="container">
   <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
       <h1 style="text-align:center"> Welcome User</h1>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-8"></div>
-   
-    <div class="col-sm-4">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3">
       <input type="text" [(ngModel)]="search">Search
     </div>
   </div>
-<br>
-<br>
-<br>
-<div class="row">
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="searchSeries()">Search Series</button>
-  </div>
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="searchSeason()">Search Season</button>
-  </div>
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="searchEpisode()">Search Episode</button>
-  </div>
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="searchCategory()">Search by category</button>
-  </div>
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="searchMovies()">Search Movies</button>
-  </div>
-  <div class="col-sm-2" id="buttons">
-    <button class="btn btn-outline-primary" (click)="getSeries()">Show Series</button>
-  </div>
-  <!-- <div class="col-sm-2" id="buttons">
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="searchSeries()">Search Series</button>
+    </div>
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="searchSeason()">Search Season</button>
+    </div>
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="searchEpisode()">Search Episode</button>
+    </div>
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="searchCategory()">Search by category</button>
+    </div>
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="searchMovies()">Search Movies</button>
+    </div>
+    <div class="col-sm-2" id="buttons">
+      <button class="btn btn-outline-primary" (click)="getSeries()">Show Series</button>
+    </div>
+    <!-- <div class="col-sm-2" id="buttons">
     <button class="btn btn-outline-primary" (click)="getMovies()">Show Movies</button>
   </div> -->
-</div>
+  </div>
 
-<div *ngIf="s">
-  <h3 style="text-align:center">Results for your search</h3>
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let s of s">
-        <td>
-          <img src={{s.image}} style="width:100px;height:100px;">
-        </td>
-        <td>{{s.name}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="s">
+    <h3 style="text-align:center">Results for your search</h3>
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let s of s">
+          <td>
+            <img src={{s.image}} style="width:100px;height:100px;">
+          </td>
+          <td>{{s.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div *ngIf="searchedMovies">
-  <h3 style="text-align:center">Results for your search: Movies</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Movie Name</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{searchedMovies.image}}</td>
-        <td>{{searchedMovies.name}}</td>
-        <td>{{searchedMovies.description}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="searchedMovie">
+    <h3 style="text-align:center">Results for your search: Movies</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Movie Name</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img src={{searchedMovie.image}}>
+          </td>
+          <td>{{searchedMovie.name}}</td>
+          <td>{{searchedMovie.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div *ngIf="searchedSeries">
-  <h3 style="text-align:center">Results for your search: Series</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Series Name</th>
-        <th>Description</th>
-        <th>Creator</th>
-        <th>Created date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{searchedSeries.name}}</td>
-        <td>{{searchedSeries.description}}</td>
-        <td>{{searchedSeries.createdby}}</td>
-        <td>{{searchedSeries.createddate}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="searchedSeries">
+    <h3 style="text-align:center">Results for your search: Series</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Series Name</th>
+          <th>Description</th>
+          <th>Creator</th>
+          <th>Created date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{searchedSeries.name}}</td>
+          <td>{{searchedSeries.description}}</td>
+          <td>{{searchedSeries.createdby}}</td>
+          <td>{{searchedSeries.createddate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div *ngIf="searchedSeason">
-  <h3 style="text-align:center">Results for your search: Season</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Season Name</th>
-        <th>Description</th>
-        <th>starts on</th>
-        <th>ends on</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{searchedSeason.name}}</td>
-        <td>{{searchedSeason.description}}</td>
-        <td>{{searchedSeason.startson}}</td>
-        <td>{{searchedSeason.endson}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="searchedSeason">
+    <h3 style="text-align:center">Results for your search: Season</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Season Name</th>
+          <th>Description</th>
+          <th>starts on</th>
+          <th>ends on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{searchedSeason.name}}</td>
+          <td>{{searchedSeason.description}}</td>
+          <td>{{searchedSeason.startson}}</td>
+          <td>{{searchedSeason.endson}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div *ngIf="searchedEpisode">
-  <h3 style="text-align:center">Results for your search: Episode</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Story</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <img src={{searchedEpisode.image}} style="height:30px; width:50px;">
-        <td>{{searchedEpisode.name}}</td>
-        <td>{{searchedEpisode.story}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="searchedEpisode">
+    <h3 style="text-align:center">Results for your search: Episode</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Story</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <img src={{searchedEpisode.image}} style="height:30px; width:50px;">
+          <td>{{searchedEpisode.name}}</td>
+          <td>{{searchedEpisode.story}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div class="row">
-  <div *ngIf="movies">
-    <h3 style="text-align:center">Movies</h3>
-    <div *ngFor="let m of movies">
-      <div class="col-sm-3">
-        <article class="col-item">
-          <div class="img-rounded">
-            <img src={{m.image}} style="width:300px;height:300px;">
-          </div>
-          <div class="info">
-            <div class="price-details col-md-6">
-              <p style="font-weight:bolder; text-align:center">{{m.name}}</p>
-              <p style="font-weight:bolder; text-align:center"> {{m.type}}</p>
+  <div class="row">
+    <div *ngIf="movies">
+      <h3 style="text-align:center">Movies</h3>
+      <div *ngFor="let m of movies">
+        <div class="col-sm-3">
+          <article class="col-item">
+            <div class="img-rounded">
+              <img src={{m.image}} style="width:300px;height:300px;">
             </div>
-          </div>
-        </article>
+            <div class="info">
+              <div class="price-details col-md-6">
+                <p style="font-weight:bolder; text-align:center">{{m.name}}</p>
+                <p style="font-weight:bolder; text-align:center"> {{m.type}}</p>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div *ngIf="series">
-  <h3 style="text-align:center">Series</h3>
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let s of series">
-        <td>{{s.name}}</td>
-        <td>{{s.type}}</td>
-        <td>
-          <button class="btn btn-info" (click)="getSesaons(s._id)">Show Seasons</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div *ngIf="series">
+    <h3 style="text-align:center">Series</h3>
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let s of series">
+          <td>{{s.name}}</td>
+          <td>{{s.type}}</td>
+          <td>
+            <button class="btn btn-info" (click)="getSesaons(s._id)">Show Seasons</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div *ngIf="seasons">
-  <h3 style="text-align:center">seasons</h3>
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let s of seasons">
-        <td>{{s.name}}</td>
-        <td>{{s.description}}</td>
-        <td>
-          <button class="btn btn-info" (click)="getEpisodes(s._id)">Show Episodes</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<div *ngIf="episodes">
-  <h3 style="text-align:center">Episodes</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Comic Name</th>
-        <th>Story</th>
-        <th>Created date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of episodes">
-        <td>
-          <img src={{e.image}} style="height:30px; width:50px;">
-        </td>
-        <td>{{e.name}}</td>
-        <td>{{e.story}}</td>
-        <td>{{e.createddate}}</td>
-        <button (click)="comment(e._id)" type="submit" class="btn btn-info">Comment</button>
-        <button (click)="getComments(e._id)" class="btn btn-info">Show Comments</button>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="flag">
-  <form (ngSubmit)="commentOnEpisode()">
-    <div class="form-group">
-      <label for="exampleTextarea">Share your views</label>
-      <textarea class="form-control" [(ngModel)]="newComment.comment" name="comment" id="exampleTextarea" rows="3"></textarea>
-    </div>
-    <input type="submit" name="submit">
-  </form>
-</div>
+  <div *ngIf="seasons">
+    <h3 style="text-align:center">seasons</h3>
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let s of seasons">
+          <td>{{s.name}}</td>
+          <td>{{s.description}}</td>
+          <td>
+            <button class="btn btn-info" (click)="getEpisodes(s._id)">Show Episodes</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
+  <div *ngIf="episodes">
+    <h3 style="text-align:center">Episodes</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Comic Name</th>
+          <th>Story</th>
+          <th>Created date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of episodes">
+          <td>
+            <img src={{e.image}} style="height:30px; width:50px;">
+          </td>
+          <td>{{e.name}}</td>
+          <td>{{e.story}}</td>
+          <td>{{e.createddate}}</td>
+          <button (click)="comment(e._id)" type="submit" class="btn btn-info">Comment</button>
+          <button (click)="getComments(e._id)" class="btn btn-info">Show Comments</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="flag">
+    <form (ngSubmit)="commentOnEpisode()">
+      <div class="form-group">
+        <label for="exampleTextarea">Share your views</label>
+        <textarea class="form-control" [(ngModel)]="newComment.comment" name="comment" id="exampleTextarea" rows="3"></textarea>
+      </div>
+      <input type="submit" name="submit">
+    </form>
+  </div>
 
-<div *ngIf="comments">
-  <h3 style="text-align:center">Comments</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>UserName</th>
-        <th>Comment</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of comments">
-        <td>{{c.name}}</td>
-        <td>{{c.comment}}</td>
-        <td>{{c.createddate}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+
+  <div *ngIf="comments">
+    <h3 style="text-align:center">Comments</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UserName</th>
+          <th>Comment</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of comments">
+          <td>{{c.name}}</td>
+          <td>{{c.comment}}</td>
+          <td>{{c.createddate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>
 <div class="footer">

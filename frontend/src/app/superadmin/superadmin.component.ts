@@ -45,6 +45,7 @@ export class SuperadminComponent implements OnInit {
   add() {
     this.flag = 1;
   }
+  
   // this.registerForm.value
   addUser() {
     if (this.user.valid === true) {
@@ -66,7 +67,6 @@ export class SuperadminComponent implements OnInit {
     else {
       this.showError = true;
     }
-
   }
 
   getUsers() {

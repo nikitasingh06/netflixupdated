@@ -1,0 +1,27 @@
+<app-header></app-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center login-title">SignUp</h1>
+                <div class="account-wall">
+                    <div class="form-group">
+                    <form class="form-signin" (ngSubmit)="registerUser()" [formGroup]="userDetails">
+                        <input type="text" class="form-control" placeholder="Enter name" formControlName="name" >
+                        <div class="check" *ngIf="showError && userDetails.controls['name'].hasError('required')">please enter name</div>     
+                        <input type="email" class="form-control" placeholder="Enter email" formControlName="email" >
+                        <div class="check" *ngIf="showError && userDetails.controls['email'].hasError('required')">please enter email</div>   
+                        <input type="password" class="form-control" placeholder="Enter password" formControlName="password" >
+                        <div class="check" *ngIf="showError && userDetails.controls['password'].hasError('required')">please enter password</div>    
+                        <input type="text" class="form-control" placeholder="Enter your contact number" formControlName="phoneNumber">
+                        <div class="check" *ngIf="showError && userDetails.controls['phoneNumber'].hasError('required')">please enter number</div>                        
+                        <button type="button" (click)="cancel()" class="btn btn-info">Cancel</button>
+                        <button type="submit" (click)="signup()" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="footer">
+    <app-footer></app-footer>
+</div>  

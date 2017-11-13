@@ -1,0 +1,345 @@
+<app-header-login></app-header-login>
+<h2 style="text-align:center">Welcome Admin</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3" id="buttons">
+      <button type="button" (click)="formCategory()" class="btn btn-outline-primary">Add Category</button>
+    </div>
+    <div class="col-sm-3" id="buttons">
+      <button type="button" (click)="getCategories()" class="btn btn-outline-primary">Categories</button>
+    </div>
+    <div class="col-sm-3" id="buttons">
+      <button type="button" (click)="getMovies()" class="btn btn-outline-primary">Movies</button>
+    </div>
+    <div class="col-sm-3" id="buttons">
+      <button type="button" (click)="getSeries()" class="btn btn-outline-primary">Show series</button>
+    </div>
+  </div>
+</div>
+<img src="../assets/admin.jpg" height="500px;" width="1440px">
+<div>
+  <div *ngIf="flagcategory">
+    <form (ngSubmit)="addCategory()" [formGroup]="category">
+      <div class="container">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+              <h1 class="text-center login-title">Category</h1>
+              <div class="account-wall">
+                <input required type="text" formControlName="name" placeholder="Type Series Name" class="form-control">
+                <div class="check" *ngIf="showError && category.controls['name'].hasError('required')">please enter name</div>
+              </div>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Add Category</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="categories">
+    <h1 class="text-center login-title">Category</h1>
+    <table class="table">
+      <tr>
+        <th> Name </th>
+      </tr>
+      <tr *ngFor="let c of categories">
+        <td>
+          <a [routerLink]="['/admin']"> {{c.name}} </a>
+        </td>
+        <td>
+          <button type="button" (click)="addM(c.name)" class="btn btn-outline-primary">Add Movie</button>
+        </td>
+        <td>
+          <button type="button" (click)="formSeries(c.name)" class="btn btn-outline-primary">Add Series</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="flagMovie">
+    <form (ngSubmit)="addMovie()" [formGroup]="movie">
+      <div class="container">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+              <h1 class="text-center login-title">ADD</h1>
+              <div class="account-wall">
+                <input required type="text" formControlName="name" placeholder="Type Name" class="form-control">
+                <div class="check" *ngIf="showError && movie.controls['name'].hasError('required')">please enter name</div>
+                <input required type="text" formControlName="image" placeholder="add url for image" class="form-control">
+                <div class="check" *ngIf="showError && movie.controls['image'].hasError('required')">please enter image</div>
+              </div>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Add Movie</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="movies">
+    <h1 class="text-center login-title">Movies</h1>
+    <table class="table">
+      <tr>
+        <th>Image</th>
+        <th> Name </th>
+        <th>Added on</th>
+      </tr>
+      <tr *ngFor="let m of movies">
+        <td>
+          <img src="{{m.image}}" height="100px;" width="200px;">
+        </td>
+        <td>
+          <a [routerLink]="['/admin']"> {{m.name}} </a>
+        </td>
+        <td>{{m.createddate}} </td>
+        <td>
+          <button type="button" (click)="deleteMovie(m._id)" class="btn btn-outline-primary">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <div *ngIf="flagSeries">
+      <form (ngSubmit)="addSeries()" [formGroup]="newSeries">
+        <div class="container">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center login-title">Series</h1>
+                <div class="account-wall">
+                  <input required type="text" formControlName="name" placeholder="Type Series Name" class="form-control">
+                  <div class="check" *ngIf="showError && newSeries.controls['name'].hasError('required')">please enter name</div>
+                  <input required type="text" formControlName="description" placeholder="Type Series description" class="form-control">
+                  <div class="check" *ngIf="showError && newSeries.controls['description'].hasError('required')">please enter description</div>
+                  <input required type="text" formControlName="createdby" placeholder="Type Creator's name" class="form-control">
+                  <div class="check" *ngIf="showError && newSeries.controls['createdby'].hasError('required')">please enter name</div>
+                </div>
+                <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Add Series</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf=series>
+    <br>
+    <br>
+    <h3 style="text-align:center">Series</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Series Name</th>
+          <th>Description</th>
+          <th>Creator</th>
+          <th>Created date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of series">
+          <td>{{s.name}}</td>
+          <td>{{s.description}}</td>
+          <td>{{s.createdby}}</td>
+          <td>{{s.createddate}}</td>
+          <button type="button" (click)="formSeason(s._id)" class="btn btn-info">Add Season</button>
+          <button type="button" (click)="getSeasons(s._id)" class="btn btn-info">Show seasons</button>
+          <button (click)="ESeries(s._id)" type="submit" class="btn btn-info">Edit</button>
+          <button class="btn btn-info" (click)="deleteSeries(s._id)">delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="flagEditseries">
+    <form (ngSubmit)="editSeries()" [formGroup]="newSeries">
+      <div class="container">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+              <h1 class="text-center login-title">Edit</h1>
+              <div class="account-wall">
+                <!-- <div *ngFor="let s of series"> -->
+                <!-- <div *ngIf="(s._id==sid)"> -->
+                <input required type="text" formControlName="name" placeholder="Type Series Name" class="form-control">
+                <input required type="text" formControlName="description" placeholder="Type Series description" class="form-control">
+                <input required type="text" formControlName="createdby" placeholder="Type Creator's name" class="form-control">
+              </div>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Edit</button>
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>
+
+    <div *ngIf="flagSeason">
+      <form (ngSubmit)="addSeason()" [formGroup]="newSeason">
+        <div class="container">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center login-title">Season</h1>
+                <div class="account-wall">
+                  <input required type="text" formControlName="name" placeholder="Type Season Name" class="form-control">
+                  <div class="check" *ngIf="showError && newSeason.controls['name'].hasError('required')">please enter name</div>
+                  <input required type="text" formControlName="description" placeholder="Type Season description" class="form-control">
+                  <div class="check" *ngIf="showError && newSeason.controls['description'].hasError('required')">please enter description</div>
+                  <input required type="date" formControlName="startson" placeholder="Type Starting date" class="form-control">
+                  <div class="check" *ngIf="showError && newSeason.controls['startson'].hasError('required')">please enter startson</div>
+                  <input required type="date" formControlName="endson" placeholder="Type Ending date" class="form-control">
+                  <div class="check" *ngIf="showError && newSeason.controls['endson'].hasError('required')">please enter endson</div>
+                </div>
+                <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Add Season</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf=seasons>
+    <br>
+    <br>
+    <h3 style="text-align:center">Seasons</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Season Name</th>
+          <th>Description</th>
+          <th>Starts on</th>
+          <th>Ends on</th>
+          <th>Created On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of seasons">
+          <td>{{s.name}}</td>
+          <td>{{s.description}}</td>
+          <td>{{s.startson}}</td>
+          <td>{{s.endson}}</td>
+          <td>{{s.createddate}}</td>
+          <button type="button" (click)="formEpisode(s._id)" class="btn btn-info">Add Episode</button>
+          <button type="button" (click)="getEpisodes(s._id)" class="btn btn-info">show Episodes</button>
+          <button (click)="ESeason(s._id)" type="submit" class="btn btn-info">Edit</button>
+          <button class="btn btn-info" (click)="deleteSeason(s._id)">delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="flagEditseason">
+    <form (ngSubmit)="editSeason()" [formGroup]="newSeason">
+      <div class="container">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+              <h1 class="text-center login-title">Edit</h1>
+              <div class="account-wall">
+                <!-- <div *ngFor="let s of series"> -->
+                <!-- <div *ngIf="(s._id==sid)"> -->
+                <input required type="text" formControlName="name" placeholder="Type Season Name" class="form-control">
+                <input required type="text" formControlName="description" placeholder="Type Season description" class="form-control">
+                <input required type="date" formControlName="startson" placeholder="Type Starting date" class="form-control">
+                <input required type="date" formControlName="endson" placeholder="Type Ending date" class="form-control">
+              </div>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Edit Season</button>
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <div *ngIf="flagEpisode">
+      <form (ngSubmit)="addEpisode()" [formGroup]="newEpisode">
+        <div class="container">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center login-title">Episode</h1>
+                <div class="account-wall">
+                  <input required type="text" formControlName="name" placeholder="Type Episode Name" class="form-control">
+                  <div class="check" *ngIf="showError && newEpisode.controls['name'].hasError('required')">please enter name</div>
+                  <input required type="text" formControlName="story" placeholder="Type Episdoe Description" class="form-control">
+                  <div class="check" *ngIf="showError && newEpisode.controls['story'].hasError('required')">please enter story</div>
+                  <input required type="text" formControlName="image" placeholder="Type Image Url" class="form-control">
+                  <div class="check" *ngIf="showError && newEpisode.controls['image'].hasError('required')">please enter url for image</div>
+                </div>
+                <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Add Episode</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf=episodes>
+    <br>
+    <br>
+    <h3 style="text-align:center">Episodes</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Episode Name</th>
+          <th>Story</th>
+          <th>Created date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of episodes">
+          <td>
+            <img src={{e.image}} style="height:30px; width:50px;">
+          </td>
+          <td>{{e.name}}</td>
+          <td>{{e.story}}</td>
+          <td>{{e.createddate}}</td>
+          <button (click)="EEpisode(e._id)" type="submit" class="btn btn-info">Edit</button>
+          <button class="btn btn-info" (click)="deleteEpisode(e._id)">delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngIf="flagEditepisode">
+    <form (ngSubmit)="editEpisode()" [formGroup]="newEpisode">
+      <div class="container">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+              <h1 class="text-center login-title">Edit</h1>
+              <div class="account-wall">
+                <!-- <div *ngFor="let s of series"> -->
+                <!-- <div *ngIf="(s._id==sid)"> -->
+                <input required type="text" formControlName="name" placeholder="Type Comic Name" class="form-control">
+                <input required type="text" formControlName="story" placeholder="Type Comic Description" class="form-control">
+                <input required type="text" formControlName="image" placeholder="Type Image Url" class="form-control">
+              </div>
+              <button type="submit" [routerLink]="['/admin']" class="btn btn-success">Edit Episode</button>
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
